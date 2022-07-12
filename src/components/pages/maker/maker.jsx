@@ -9,8 +9,8 @@ import styles from "./maker.module.css";
 import Preview from "./preview/preview";
 
 function Maker({ authService }) {
-    const [cards, setCards] = useState([
-        {
+    const [cards, setCards] = useState({
+        1: {
             id: "1",
             name: "SiHyeong",
             company: "naver",
@@ -21,7 +21,7 @@ function Maker({ authService }) {
             fileName: "sihyeong",
             fileURL: null,
         },
-        {
+        2: {
             id: "2",
             name: "SiHyeong2",
             company: "naver",
@@ -32,7 +32,7 @@ function Maker({ authService }) {
             fileName: "sihyeong",
             fileURL: null,
         },
-        {
+        3: {
             id: "3",
             name: "SiHyeong3",
             company: "naver",
@@ -43,7 +43,7 @@ function Maker({ authService }) {
             fileName: "sihyeong",
             fileURL: null,
         },
-    ]);
+    });
     let navigate = useNavigate();
     const { state: id } = useLocation();
     const onLogout = () => {
@@ -55,15 +55,30 @@ function Maker({ authService }) {
         });
     });
 
-    const onAddCard = (card) => {
-        const updateCards = [...cards, card];
-        setCards(updateCards);
+    const onUpdateOrAddCard = (card) => {
+        setCards((preCards) => {
+            const update = { ...preCards };
+            update[card.id] = card;
+            return update;
+        });
+    };
+    const onDeleteCard = (card) => {
+        setCards((preCards) => {
+            const update = { ...preCards };
+            delete update[card.id];
+            return update;
+        });
     };
     return (
         <section className={styles.maker}>
             <Header onLogout={onLogout} />
             <div className={styles.container}>
-                <Editor cards={cards} onAddCard={onAddCard} />
+                <Editor
+                    cards={cards}
+                    onAddCard={onUpdateOrAddCard}
+                    onUpdateCard={onUpdateOrAddCard}
+                    onDeleteCard={onDeleteCard}
+                />
                 <Preview cards={cards} />
             </div>
             <Footer />
