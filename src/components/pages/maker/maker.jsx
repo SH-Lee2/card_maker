@@ -8,7 +8,7 @@ import Editor from "./editor/editor";
 import styles from "./maker.module.css";
 import Preview from "./preview/preview";
 
-function Maker({ authService }) {
+function Maker({ FileInput, authService }) {
     const [cards, setCards] = useState({
         1: {
             id: "1",
@@ -19,7 +19,8 @@ function Maker({ authService }) {
             email: "tlgud585@gmail.com",
             message: "go for it",
             fileName: "sihyeong",
-            fileURL: null,
+            fileURL:
+                "http://res.cloudinary.com/dz6bdal71/image/upload/v1657713683/jjmmyjiakuam1udv5uzd.jpg",
         },
         2: {
             id: "2",
@@ -74,6 +75,7 @@ function Maker({ authService }) {
             <Header onLogout={onLogout} />
             <div className={styles.container}>
                 <Editor
+                    FileInput={FileInput}
                     cards={cards}
                     onAddCard={onUpdateOrAddCard}
                     onUpdateCard={onUpdateOrAddCard}
