@@ -8,7 +8,7 @@ const Login = ({ authService }) => {
     let navigate = useNavigate();
 
     const goToMaker = (userId) => {
-        navigate("/maker", { state: { id: userId } });
+        navigate("/maker", { state: { userId: userId } });
     };
 
     const onLogin = (event) => {
@@ -18,7 +18,7 @@ const Login = ({ authService }) => {
     };
     useEffect(() => {
         authService.onAuthChange((user) => {
-            user && goToMaker(user.id);
+            user && goToMaker(user.uid);
         });
     });
     return (
