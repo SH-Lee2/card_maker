@@ -6,13 +6,14 @@ import AuthService from "./service/auth_service";
 import ImageUploader from "./service/image_uploader";
 import ImageFileInput from "./UI/image_file_input/image_file_input";
 import CardRepository from "./service/card_repository";
+import { firebaseApp } from "./service/firebase";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-const authService = new AuthService();
+const authService = new AuthService(firebaseApp);
 
 const imageUploader = new ImageUploader();
 
-const cardRepository = new CardRepository();
+const cardRepository = new CardRepository(firebaseApp);
 
 const FileInput = memo((props) => (
     <ImageFileInput {...props} imageUploader={imageUploader} />
