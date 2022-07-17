@@ -31,7 +31,7 @@ function Maker({ FileInput, authService, cardRepository }) {
         authService.onAuthChange((user) => {
             !user && navigate("/");
         });
-    });
+    }, [authService, navigate]);
 
     const onUpdateOrAddCard = (card) => {
         setCards((preCards) => {
